@@ -28,8 +28,6 @@ Para rodar o projeto localmente, siga os passos abaixo:
 
 Clone o repositório:
 
-bash
-Copiar código
 git clone https://github.com/gustavomjo/server.git
 cd server
 Configure o ambiente Delphi com as dependências necessárias, como o Horse, FireDAC e outras bibliotecas mencionadas no projeto.
