@@ -1,0 +1,27 @@
+# Delphi Binaries
+*.exe
+*.dll
+*.dcu
+*.dcp
+*.dres
+*.local
+*.map
+
+# Delphi Packages
+*.bpl
+*.dcp
+*.bpi
+
+# Delphi Debug Files
+*.tds
+
+# Delphi Project Files
+*.identcache
+__history/
+__recovery/
+*.groupproj
+*.dsk
+*.local
+
+# Backup files
+*.~*~
