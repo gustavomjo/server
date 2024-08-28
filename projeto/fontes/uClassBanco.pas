@@ -89,7 +89,6 @@ função para dar um execSQL um commit caso sucesso e um rollback na falha
 podendo ter campos de parametros para filtro
 *)
   Query := TFDQuery.Create(nil);
-
   try
     OpenConexao;
     Query.Connection := dm.conexao;
@@ -109,8 +108,6 @@ podendo ter campos de parametros para filtro
   finally
     Query.Free;
   end;
-
-
 end;
 
 function TBanco.OpenSQL(const SQL: String; const Params: TArray<TParamPair>): TJSONArray;
@@ -384,7 +381,6 @@ var
   sql : string;
   Params : TArray<TParamPair>;
 begin
-
   SetLength(Params, 2);
   Params[0].Key  := 'serverid';
   Params[0].Value := serverID;
@@ -395,7 +391,6 @@ begin
          'where serverid = :serverid and ' +
          '      videoid = :videoid';
   result := OpenSQL(sql,Params);
-
 end;
 
 function TBancoVideo.RecyclingVideo(const dias: integer): Boolean;

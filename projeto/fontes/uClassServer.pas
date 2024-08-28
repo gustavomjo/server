@@ -22,7 +22,6 @@ type
   public
     constructor Create;
     destructor Destroy; override;
-    function ToJSON: TJSONObject;
     procedure Start;
     function AvailableServer(const IP: string; Port: Integer): Boolean;
   published
@@ -50,6 +49,8 @@ begin
     TCPClient.Port := Port;
     TCPClient.ReadTimeout := 100;
     try
+      //TIdTCPClient utilizado para estabelecer uma conexao
+      //caso de erro : except
       TCPClient.Connect;
       Result := TCPClient.Connected;
     except
@@ -314,8 +315,6 @@ begin
       bd := TBancoVideo.Create;
       try
         serverid := req.Params['serverid'];
-//        sql := 'select * from videos '+
-//               'where serverid = :serverid  ' ;
         JSONArray := bd.getAllVideoServerId(serverid);
 
         res.ContentType('application/json');
@@ -352,8 +351,7 @@ begin
           vStream.Free;
         end;
       except
-        on E: Exception do
-        begin
+        on E: Exception do begin
           res.Status(500).Send('Erro ao processar a solicitação: ' + E.Message);
         end;
       end;
@@ -371,7 +369,6 @@ begin
       bd := TBancoVideo.Create;
       try
         if dias > 0 then begin
-
           if bd.RecyclingVideo(dias) then
             res.Send('{ "status": "Deletado" }').Status(THTTPStatus.OK)
           else
@@ -396,14 +393,6 @@ begin
   FHorse.Listen(FPorta);
 end;
 
-function TServer.ToJSON: TJSONObject;
-begin
-  Result := TJSONObject.Create;
-  Result.AddPair('id', FID);
-  Result.AddPair('name', FName);
-  Result.AddPair('ip', FIP);
-  Result.AddPair('porta', TJSONNumber.Create(FPorta));
-end;
 
 end.
 
